@@ -3,6 +3,7 @@ import pandas as pd
 import seaborn as sns
 from dotenv import load_dotenv
 import spotipy
+import matplotlib.pyplot as plt
 
 from spotipy.oauth2 import SpotifyClientCredentials
 
@@ -50,3 +51,17 @@ df_sorted = df.sort_values(by='popularity', ascending=False)
 #Show top 3 songs
 top_3_songs = df_sorted.head(3)
 print(top_3_songs)
+
+#Create scatter plot
+
+sns.scatterplot(data=df, x='popularity', y='duration_ms')
+plt.title('Scatter Plot of Song Duration vs Popularity')
+plt.ylabel('Duration (milliseconds)')
+plt.xlabel('Popularity')
+plt.show()
+
+# Answer Correlation question
+correlation = df['duration_ms'].corr(df['popularity'])
+print(f'Correlation between duration and popularity: {correlation:.2f}')
+
+print(f'There is no significant relationship between song duration and popularity.\nSong duration does not impact popularity.')
